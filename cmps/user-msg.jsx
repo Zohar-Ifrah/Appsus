@@ -23,6 +23,7 @@ export function UserMsg() {
     setMsg(null)
   }
 
+  console.log(111)
   if (!msg) return <span></span>
   return (
     <section className={`user-msg ${msg.type}`}>
