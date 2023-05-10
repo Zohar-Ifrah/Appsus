@@ -1,1 +1,12 @@
- /* note index */
+.note {
+  display: flex;
+  flex-direction: row;
+  background-color: aqua;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  width: 400px;
+  height: 200px;
+  margin: auto;
+  /* position: relative; */
+}

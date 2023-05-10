@@ -14,6 +14,9 @@
 
 @import './apps/note/views/note-index.css';
 
+/* this line opened */
+@import './apps/note/views/note-index.css';
+
 @import './apps/mail/views/mail-index.css';
 
 /* Cmps */
