@@ -1,6 +1,6 @@
 import { MailPreview } from "./mail-preview.jsx";
 
-export function MailList({ mails, onRemoveMail }) {
+export function MailList({ mails, onSetTrashMail }) {
 
     return (
         <table border="1" className="mail-list">
@@ -10,7 +10,7 @@ export function MailList({ mails, onRemoveMail }) {
                 </tr>
             </thead>
             <tbody>
-            {mails.map(mail => <MailPreview key={mail.id} mail={mail} />)}
+                {mails.map(mail => <MailPreview key={mail.id} mail={mail} onSetTrashMail={onSetTrashMail} />)}
             </tbody>
         </table>
     )

@@ -1,4 +1,3 @@
-const { Link } = ReactRouterDOM
 const { useEffect, useState } = React
 
 import { MailFolderList } from "../cmps/mail-folder-list.jsx"
@@ -7,61 +6,56 @@ import { MailLogo } from "../cmps/mail-logo.jsx"
 import { MailSearch } from "../cmps/mail-search.jsx"
 import { mailService } from "../services/mail.service.js"
 
-
 export function MailIndex() {
-
     const [mails, setMails] = useState([])
-    // const [selectedMail, setSelectedMail] = useState(null)
-    // const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
+    const [filterBy, setFilterBy] = useState({status: 'inbox'})
 
     useEffect(() => {
-        console.log('first load mail-index')
         loadMails()
-    }, [])
+    }, [filterBy,])
 
     function loadMails() {
-        mailService.query().then(setMails)
-        // mailService.query().then(setMails)
+        mailService.query(filterBy).then(setMails)
     }
 
-    function onRemoveMail(mailId) {
-        // mailService.remove(mailId).then(() => {
-        //     const updatedMails = mails.filter(mail => mail.id !== mailId)
-        //     setMails(updatedMails)
-        // })
-        console.log('remove mail')
+    // function onRemoveMail(mailId) { // to set to only remove from trash
+    //     mailService.remove(mailId).then(() => {
+    //         const updatedMails = mails.filter(mail => mail.id !== mailId)
+    //         setMails(updatedMails)
+    //     })
+    //     console.log('remove mail')
+    // }
+
+    // change the mail *status* to *trash* and update mails with setMails
+    function onSetTrashMail(id) { 
+        const updatedMail = mails.find(mail => mail.id === id)
+        updatedMail.status = 'trash'
+        mailService.save(updatedMail).then(() => {
+            const updatedMails = mails.filter(mail => mail.id !== id)
+            updatedMails.push(updatedMail)
+            setMails(updatedMails)
+            loadMails()
+        })
+        console.log('Conversation moved to Trash.') // to be user msg
     }
 
-    // function onSetFilter(filterBy) {
-    //     setFilterBy(prevFilterBy => ({ ...prevFilterBy, ...filterBy }))
-    // }
-
-    // function onSelectmail(mail) {
-    //     // setSelectedMail(mail)
-    //     // setFilterBy(mailService.getDefaultFilter)
-
-    // }
+    function onSetFilter(filterBy) {
+        setFilterBy(prevFilterBy => ({ ...prevFilterBy, ...filterBy }))
+    }
 
     console.log('render mail-index')
     return (
         <section className="mails-page main-layout">
             <div className="mails-index" >
-                {/* {!selectedMail && <React.Fragment> */}
                 {<React.Fragment>
-                    {/* <MailFilter onSetFilter={onSetFilter} filterBy={filterBy} />
-                    <div className="add-mail">
-                    <Link to="/mail/edit"><button className="add-mail-btn">Add mail</button></Link>
-                    <Link to="/mail/google-add"><button className="add-mail-btn">Add Google mail</button></Link>
-                    </div> */}
                     <MailLogo />
                     <MailSearch />
                     <div className="mail-lists">
-                    <MailFolderList />
-                    <MailList mails={mails} onRemoveMail={onRemoveMail} />
+                    <MailFolderList onSetFilter={onSetFilter}/>
+                    <MailList mails={mails} onSetTrashMail={onSetTrashMail} />
                     </div>
                 </React.Fragment>}
             </div>
-            {/* {selectedMail && <MailDetails onBack={() => setSelectedMail(null)} mail={selectedMail} />} */}
         </section>
     )
 }

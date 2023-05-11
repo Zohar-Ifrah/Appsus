@@ -24,3 +24,7 @@
   td:last-child {
     border-right: none;
   }
+
+  .mail-compose-btn{
+    background-color: #c2e7ff;
+  }

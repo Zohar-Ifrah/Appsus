@@ -1,12 +1,15 @@
 import { storageService } from "../../../services/async-storage.service.js"
+import { storage } from "../../../services/storage.service.js"
 
 export const mailService = {
     query,
     get,
     remove,
-    save
+    save,
+    getEmptyFields,
+    getUser
     // getEmptymail,
-    // getDefaultFilter,
+
     // updateReview,
     // getNextmailId,
     // getPrevmailId,
@@ -31,7 +34,8 @@ const demoData = [
             mail: 'Popo@popo.com',
             fullname: 'Popo Po'
         },
-        to: 'zoharYuval@Appsus.com'
+        to: 'zoharYuval@Appsus.com',
+        status: 'inbox'
     },
     {
         id: 'e102',
@@ -42,7 +46,8 @@ const demoData = [
         removedAt: null,
         from: loggedinUser
         ,
-        to: 'momo@momo.com'
+        to: 'momo@momo.com',
+        status: 'sent'
     },
     {
         id: 'e103',
@@ -50,12 +55,13 @@ const demoData = [
         body: 'Would love to catch up sometimes',
         isRead: false,
         sentAt: 1551133930594,
-        removedAt: 1551133930594,
+        removedAt: null,
         from: {
             mail: 'momo@momo.com',
             fullname: 'momo mo'
         },
-        to: 'zoharYuval@appsus.com'
+        to: 'zoharYuval@appsus.com',
+        status: 'inbox'
     },
     {
         id: 'e104',
@@ -63,12 +69,13 @@ const demoData = [
         body: 'Would love to catch up sometimes',
         isRead: false,
         sentAt: 1551133930594,
-        removedAt: 1551133930594,
+        removedAt: null,
         from: {
             mail: 'puki@pu.com',
             fullname: 'puki pu'
         },
-        to: 'zoharYuval@appsus.com'
+        to: 'zoharYuval@appsus.com',
+        status: 'inbox'
     },
     {
         id: 'e105',
@@ -76,38 +83,56 @@ const demoData = [
         body: 'Would love to catch up sometimes',
         isRead: false,
         sentAt: 1551133930594,
+        removedAt: null,
+        from: loggedinUser,
+        to: 'assus@assus.com',
+        status: 'sent'
+    },
+    {
+        id: 'e106',
+        subject: 'Miss you!',
+        body: 'Would love to catch up sometimes',
+        isRead: false,
+        sentAt: 1551133930594,
         removedAt: 1551133930594,
         from: loggedinUser,
-        to: 'assus@assus.com'
+        to: 'assus@assus.com',
+        status: 'trash'
+    },
+    {
+        id: 'e107',
+        subject: 'Miss you!',
+        body: 'Would love to catch up sometimes',
+        isRead: false,
+        sentAt: 1551133930594,
+        removedAt: null,
+        from: loggedinUser,
+        to: 'assus@assus.com',
+        status: 'draft'
     }
 ]
 
+//first load of DB
+_createMails()
 
 function query(filterBy = {}) {
     return storageService.query(MAIL_KEY)
         .then(mails => {
-            if (!mails || mails.length === 0) mails = demoData
+
+            // render only mails that contains the *TXT* input
+            if (filterBy.txt) {
+                console.log(filterBy.txt)
+                const regExp = new RegExp(filterBy.txt, 'i')
+                mails = mails.filter(mail => regExp.test(mail.body)) //|| regExp.test(mail.subject)
+            }
+
+            
+            if (filterBy.status) {
+                if (filterBy.status === 'all') return mails
+                mails = _filterMails(mails, filterBy.status)
+            }
             return mails
         })
-
-    // .then(mails => {
-    //     // render only mails that contains the *TXT*
-    //     if (filterBy.txt) {
-    //         const regExp = new RegExp(filterBy.txt, 'i')
-    //         mails = mails.filter(mail => regExp.test(mail.title))
-    //     }
-
-    //     // render only mails that *LOWER* price then Max-Price
-    //     if (filterBy.maxPrice) {
-    //         mails = mails.filter(mail => mail.listPrice.amount <= filterBy.maxPrice)
-    //     }
-
-    //     // render only mails that on *SALE*
-    //     if (filterBy.isOnSale) {
-    //         mails = mails.filter(mail => mail.listPrice.isOnSale)
-    //     }
-    //     return mails
-    // })
 }
 
 // return mail from DB by id
@@ -129,3 +154,27 @@ function save(mail) {
     }
 }
 
+function getEmptyFields() {
+    const filterBy = {
+        from: '',
+        to: '',
+        subject: '',
+        body: ''
+    }
+    return filterBy
+}
+
+function _createMails() {
+    let mails = storage.loadFromStorage(MAIL_KEY) || demoData
+    if (mails.length === 0) mails = demoData
+    storage.saveToStorage(MAIL_KEY, mails)
+}
+
+function _filterMails(mails, filter) {
+    mails = mails.filter(mail => mail.status === filter)
+    return mails
+}
+
+function getUser(){
+    return loggedinUser
+}

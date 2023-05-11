@@ -10,6 +10,8 @@ import { Yuval } from "./cmps/yuval.jsx"
 import { Zohar } from "./cmps/zohar.jsx"
 import { NoteDetails } from "./apps/note/cmps/note-details.jsx"
 import { NoteEdit } from "./apps/note/views/note-edit.jsx"
+import { MailCompose } from "./apps/mail/cmps/mail-compose.jsx"
+// import { MailCompose } from "./apps/mail/views/mail-compose.jsx"
 
 
 
@@ -23,7 +25,9 @@ export function App() {
                     <Route path="zohar" element={<Zohar />} />
                     <Route path="yuval" element={<Yuval />} />
                 </Route>
-                <Route path="/mail" element={<MailIndex />} />
+                <Route path="/mail" element={<MailIndex />} >
+                <Route path="compose" element={<MailCompose />} />
+                </Route>
                 <Route path="/note" element={<NoteIndex />} />
                 <Route path="/note/:moteId" element={<NoteDetails />} />
                 <Route path="/note/edit" element={<NoteEdit />} />
