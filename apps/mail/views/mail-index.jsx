@@ -1,5 +1,6 @@
 const { useEffect, useState } = React
 
+import { MailCompose } from "../cmps/mail-compose.jsx"
 import { MailFolderList } from "../cmps/mail-folder-list.jsx"
 import { MailList } from "../cmps/mail-list.jsx"
 import { MailLogo } from "../cmps/mail-logo.jsx"
@@ -8,35 +9,44 @@ import { mailService } from "../services/mail.service.js"
 
 export function MailIndex() {
     const [mails, setMails] = useState([])
-    const [filterBy, setFilterBy] = useState({status: 'inbox'})
-
+    const [filterBy, setFilterBy] = useState({ status: 'inbox' })
+    const [unreadCount, setUnreadCount] = useState()
+    const [isComposed, setIsComposed] = useState(false)
     useEffect(() => {
         loadMails()
     }, [filterBy,])
 
     function loadMails() {
-        mailService.query(filterBy).then(setMails)
+        mailService.query(filterBy).then(mails => {
+            setMails(mails)
+            const unreadCount = mails.reduce((count, mail) => {
+                if (!mail.isRead) count++
+                return count
+            }, 0)
+            setUnreadCount(unreadCount)
+            console.log(unreadCount)
+        })
     }
 
-    // function onRemoveMail(mailId) { // to set to only remove from trash
-    //     mailService.remove(mailId).then(() => {
-    //         const updatedMails = mails.filter(mail => mail.id !== mailId)
-    //         setMails(updatedMails)
-    //     })
-    //     console.log('remove mail')
-    // }
+    // change the mail field (status/isRead) to value (status :inbox/trash.. isRead: true/false )
+    //>>> update mails with setMails >>> sends user msg
+    function onChangeSettings(id, field, val) {
 
-    // change the mail *status* to *trash* and update mails with setMails
-    function onSetTrashMail(id) { 
-        const updatedMail = mails.find(mail => mail.id === id)
-        updatedMail.status = 'trash'
-        mailService.save(updatedMail).then(() => {
-            const updatedMails = mails.filter(mail => mail.id !== id)
-            updatedMails.push(updatedMail)
-            setMails(updatedMails)
-            loadMails()
+        const mailToUpdate = mails.find(mail => mail.id === id)
+        mailToUpdate[field] = val 
+
+        mailService.save(mailToUpdate).then(() => { // to update service
+            const updateMails = mails.slice()
+            const idx = mails.findIndex(mail => mail.id === id)
+
+            updateMails.splice(idx, 1, mailToUpdate)
+            setMails(updateMails) // to update DOM
+            
+            if (val === 'trash'){ //if trash also update count
+                loadMails()
+                console.log('Conversation moved to Trash.') // to be user msg
+            }
         })
-        console.log('Conversation moved to Trash.') // to be user msg
     }
 
     function onSetFilter(filterBy) {
@@ -51,10 +61,11 @@ export function MailIndex() {
                     <MailLogo />
                     <MailSearch />
                     <div className="mail-lists">
-                    <MailFolderList onSetFilter={onSetFilter}/>
-                    <MailList mails={mails} onSetTrashMail={onSetTrashMail} />
+                        <MailFolderList onSetFilter={onSetFilter} unreadCount={unreadCount} />
+                        <MailList mails={mails} onChangeSettings={onChangeSettings} />
                     </div>
                 </React.Fragment>}
+                {isComposed && <MailCompose />}
             </div>
         </section>
     )

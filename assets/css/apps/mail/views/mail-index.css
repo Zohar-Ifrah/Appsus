@@ -178,21 +178,43 @@
  .mail-folder-list {
    display: flex;
    flex-direction: column;
-   width: 200px;
-   min-width: 200px;
-   height: 100%;
    background-color: #f1f3f4;
-   padding: 1rem;
+   align-items: flex-start;
+   gap: 0.2rem;
+   margin-inline-end: 0.5em;
  }
 
  .mail-folder-list button {
    border: none;
    padding: 1em;
    border-radius: 555px;
+   min-width: 8em;
+   width: 16em;
+   font-size: 1.1em;
+   height: 2.6em;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
  }
 
  .mail-folder-list button:hover {
    background-color: #e8ebec;
+ }
+
+ .sent-img {
+   width: 1.5em;
+   position: relative;
+   right: 4px;
+ }
+
+ .icon-star-empty {
+   position: relative;
+   right: 4px;
+ }
+
+ .icon-inbox{
+  position: relative;
+  right: 4px;
  }
 
  .mails-page {
@@ -243,7 +265,7 @@
  input[type="text"],
  textarea,
  select,
- button.compose-form{
+ button.compose-form {
    width: 100%;
    padding: 0.4em;
    border: 1px solid #ccc;
