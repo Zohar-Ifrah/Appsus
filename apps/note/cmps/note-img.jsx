@@ -1,11 +1,16 @@
-// import React from 'react';
 
-// export function NoteImg(props) {
-//     const { note } = props;
-//     return (
-//         <React.Fragment>
-//             <h3>{note.info.title}</h3>
-//             <img width="380" height="240" src={note.info.url} />
-//         </React.Fragment>
-//     );
-// }
+
+export function NoteImg({ note }) {
+
+    return (
+        <React.Fragment>
+            <div className="note-img">
+            {/* <div contentEditable="true">{note.info.title}</div> */}
+
+                <img src={note.info.url} />
+                {/* <div className="note-text">
+                </div> */}
+            </div>
+        </React.Fragment>
+    );
+}
