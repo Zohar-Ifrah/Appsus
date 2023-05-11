@@ -1,8 +1,13 @@
+import { utilService } from "../../../services/util.service.js";
+
 const { Fragment, useState } = React
 const { Link } = ReactRouterDOM
 
-export function MailPreview({ mail }) {
+export function MailPreview({ mail, onSetTrashMail }) {
     const [isExpanded, setIsExpanded] = useState(false)
+    const date = new Date(mail.sentAt)
+    const month = utilService.getMonthName(date)
+    const day = date.getDate()
 
     return <Fragment>
         <tr onClick={() => setIsExpanded(prevIsExpanded => !prevIsExpanded)}>
@@ -10,7 +15,7 @@ export function MailPreview({ mail }) {
             <td>{mail.from.fullname}</td>
             <td>{mail.subject}</td>
             <td>{mail.body}</td>
-            <td>{mail.sentAt}</td>
+            <td>{month + ' ' + day}</td>
 
         </tr>
         {
@@ -20,7 +25,7 @@ export function MailPreview({ mail }) {
                     {mail.body}
                     <button title="Enter mail">{'▢'}</button>
                     <button title="Mark as read">{'✉️'}</button>
-                    <button title="Delete">{'🗑'}</button>
+                    <button title="Delete" onClick={() => onSetTrashMail(mail.id)}>{'🗑'}</button>
                     <br />
                     {mail.from.fullname}
                     {` <${mail.from.mail}> `}
