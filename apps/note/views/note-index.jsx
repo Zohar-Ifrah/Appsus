@@ -2,9 +2,9 @@ const { Link } = ReactRouterDOM
 const { useEffect, useState } = React
 
 import { NoteFilter } from "../cmps/note-filter.jsx"
-import { NotePreview } from "../cmps/note-preview.jsx"
+// import { NotePreview } from "../cmps/note-preview.jsx"
 import { noteService } from "../services/note.service.js"
-// import { NoteList } from "../cmps/note-list.jsx"
+import { NoteList } from "../cmps/note-list.jsx"
 // import { NotePreview } from './note-preview.jsx'
 // import { NoteDetails } from "./note-details.jsx"
 
@@ -42,7 +42,7 @@ export function NoteIndex() {
                         <Link to="//edit"><button className="add-note-btn">Add note</button></Link>
 
                     </div>
-                    <NotePreview notes={notes} onRemoveNote={onRemoveNote} />
+                    <NoteList notes={notes} onRemoveNote={onRemoveNote} />
                 </React.Fragment>}
             </div>
             {selectedNote && <NoteDetails onBack={() => setSelectedNote(null)} note={selectedNote} />}

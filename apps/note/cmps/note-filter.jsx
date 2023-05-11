@@ -46,6 +46,8 @@ export function NoteFilter({ filterBy, onSetFilter }) {
             <option value="NoteTxt">Text</option>
             <option value="NoteImg">Image</option>
             <option value="NoteTodos">Todo</option>
+            <option value="NoteVideo">Video</option>
+            <option value="NoteAudio">Audio</option>
           </select>
         </form>
       </section>

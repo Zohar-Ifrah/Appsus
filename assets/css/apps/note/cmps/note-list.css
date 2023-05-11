@@ -1,1 +1,13 @@
- /* note list */
+/* .note {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  } */
+  
+  .note-img {
+    grid-row: 1 / span 2;
+  }
+  
+  .note-txt {
+    grid-row: 2;
+  } 

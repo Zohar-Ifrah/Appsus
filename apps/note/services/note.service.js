@@ -98,15 +98,15 @@ function _createNotes() {
 function notesData() {
 return  [
     {
+        type: "NoteVideo",
         id: 'n101',
-        createdAt: 1112222,
-        type: 'NoteTxt',
-        isPinned: true,
-        style: {
-            backgroundColor: '#00d'
-        },
+        isPinned: false,
         info: {
-            txt: 'Fullstack Me Baby!'
+            title: 'Relaxation music',
+            url: "https://www.youtube.com/embed/MYJldv7ZhOA"
+        },
+        style: {
+            backgroundColor: "#ffee58fa",
         }
     },
     {
@@ -114,7 +114,7 @@ return  [
         type: 'NoteImg',
         isPinned: false,
         info: {
-            url: 'http://some-img/me',
+            url: 'https://picsum.photos/200/300',
             title: 'Bobi and Me'
         },
         style: {
@@ -138,12 +138,9 @@ return  [
         type: 'NoteImg',
         isPinned: false,
         info: {
-            url: 'http://some-img/me',
+            url: 'https://picsum.photos/200/300',
             title: 'Bobi and Me'
         },
-        style: {
-            backgroundColor: '#00d'
-        }
     },
     {
         id: 'n105',
@@ -158,11 +155,23 @@ return  [
         }
     },
     {
+        type: "NoteVideo",
         id: 'n106',
+        isPinned: false,
+        info: {
+            title: 'Relaxation music',
+            url: "https://www.youtube.com/embed/MYJldv7ZhOA"
+        },
+        style: {
+            backgroundColor: "#ffee58fa",
+        }
+    },
+    {
+        id: 'n107',
         type: 'NoteImg',
         isPinned: false,
         info: {
-            url: 'http://some-img/me',
+            url: 'https://picsum.photos/200/300',
             title: 'Bobi and Me'
         },
         style: {
@@ -170,7 +179,17 @@ return  [
         }
     },
     {
-        id: 'n107',
+    id: 'n108',
+    type: 'NoteAudio',
+    isPinned: false,
+    info: {
+        url: '../../apps/note/audio/audio.mp3',
+    },
+
+    
+},
+    {
+        id: 'n109',
         type: 'NoteTodos',
         isPinned: false,
         info: {
