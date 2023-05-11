@@ -3,8 +3,8 @@ const { useEffect, useState } = React
 
 import { NoteFilter } from "../cmps/note-filter.jsx"
 import { NotePreview } from "../cmps/note-preview.jsx"
-// import { NoteList } from "../cmps/note-list.jsx"
 import { noteService } from "../services/note.service.js"
+// import { NoteList } from "../cmps/note-list.jsx"
 // import { NotePreview } from './note-preview.jsx'
 // import { NoteDetails } from "./note-details.jsx"
 
@@ -20,7 +20,6 @@ export function NoteIndex() {
 
     function loadNotes() {
         noteService.query(filterBy).then(notes => setNotes(notes))
-
     }
 
     function onRemoveNote(noteId) {
@@ -33,8 +32,6 @@ export function NoteIndex() {
     function onSetFilter(filterBy) {
         setFilterBy(prevFilterBy => ({ ...prevFilterBy, ...filterBy }))
     }
-
-
 
     return (
         <section className="notes-page">
@@ -50,7 +47,6 @@ export function NoteIndex() {
             </div>
             {selectedNote && <NoteDetails onBack={() => setSelectedNote(null)} note={selectedNote} />}
         </section>
-
     )
 }
 

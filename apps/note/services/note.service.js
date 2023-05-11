@@ -13,7 +13,7 @@ export const noteService = {
     remove,
     getEmptyNote,
     getDefaultFilter,
-    // save,
+    save,
     // getNextNoteId,
     // getPrevNoteId,
 }
@@ -25,6 +25,16 @@ function query(filterBy = {}) {
             if (filterBy.txt) {
                 const regExp = new RegExp(filterBy.txt, 'i')
                 notes = notes.filter(note => regExp.test(note.info.txt))
+            }
+
+            if (filterBy.type) {
+                console.log(filterBy.type);
+                notes = notes.filter(note => note.type === filterBy.type)
+            }
+
+            // filter pinned notes
+            if (filterBy.isPinned) {
+                notes = notes.filter(note => note.isPinned)
             }
 
             // if (filterBy.type) {
@@ -44,13 +54,13 @@ function remove(noteId) {
     return storageService.remove(NOTE_KEY, noteId)
 }
 
-// function save(note) {
-//     if (note.id) {
-//         return storageService.put(NOTE_KEY, note)
-//     } else {
-//         return storageService.post(NOTE_KEY, note)
-//     }
-// }
+function save(note) {
+    if (note.id) {
+        return storageService.put(NOTE_KEY, note)
+    } else {
+        return storageService.post(NOTE_KEY, note)
+    }
+}
 
 function getEmptyNote(txt = '', type = '') {
     return { txt , type }

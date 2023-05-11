@@ -49,8 +49,9 @@ export function NoteDetails() {
     if (!note) return <div>Loading...</div>
     return (
         <section className="note-details">
-            {/* <h1>Note title: {note.info.title}</h1> */}
-            <h1>Note title:</h1>
+            
+            
+            
             
             {/* <h5>Created date: {note.info.todos.doneAt}</h5> */}
             

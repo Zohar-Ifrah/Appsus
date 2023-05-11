@@ -67,10 +67,10 @@ export function NoteEdit() {
                 <label htmlFor="title">{noteToEdit.txt}</label>
                 <input onChange={handleChange} value={title} type="text" name="title" id="title" />
 
-                <label htmlFor="price">Price:</label>
+                <label htmlFor="title">Title:</label>
 
                 
-                <button>{noteToEdit.id ? 'Save' : 'Add'}</button>
+                <button>{noteToEdit.id ? 'Save' : 'Add' }</button>
             </form>
 
         </section>
