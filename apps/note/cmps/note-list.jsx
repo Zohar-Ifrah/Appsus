@@ -6,7 +6,7 @@ import { NotePreview } from "./note-preview.jsx";
 
 export function NoteList({ notes, onRemoveNote }) {
 
-
+console.log('yuvi');
     return (
         <section>
 

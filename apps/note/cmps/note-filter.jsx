@@ -9,19 +9,16 @@ export function NoteFilter({ filterBy, onSetFilter }) {
     }, [filterByToEdit])
 
     function handleChange({ target }) {
-        console.log(target);
         const field = target.name
-        console.log(field);
-        const value = target.type === 'type' ? (target.value || '') :
-        console.log(target.type);
-        target.type === 'text' ? target.value : 
-        target.checked
+        const value = target.value
         setFilterByToEdit(prevFilterBy => ({ ...prevFilterBy, [field]: value }))
+
+    
     }
 
     function onSubmitFilter(ev) {
         ev.preventDefault()
-        onSetFilter(filterByToEdit)
+        onSetFilter(filterByToEdit);
     }
 
     const { txt, type } = filterByToEdit
@@ -31,7 +28,7 @@ export function NoteFilter({ filterBy, onSetFilter }) {
 
             <form onSubmit={onSubmitFilter}>
                 <label htmlFor="txt">Search:</label>
-                <input value={txt} onChange={handleChange} name="txt" id="txt" type="text" placeholder="By Title" />
+                <input value={txt} onChange={handleChange} name="txt" id="txt" type="text" placeholder="text search" />
 
                 <label htmlFor="type">TYPE:</label>
                 <input value={type} onChange={handleChange} type="type" name="type" id="type" placeholder="By Type" />

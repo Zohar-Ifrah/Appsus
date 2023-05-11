@@ -1,7 +1,7 @@
 
 import { storageService } from '../../../services/async-storage.service.js'
 import { storage } from '../../../services/storage.service.js'
-import { utilService } from '../../../services/util.service.js'
+// import { utilService } from '../../../services/util.service.js'
 
 
 const NOTE_KEY = 'notesDB'
@@ -11,11 +11,11 @@ export const noteService = {
     query,
     get,
     remove,
-    // save,
     getEmptyNote,
     getDefaultFilter,
-    getNextNoteId,
-    getPrevNoteId,
+    // save,
+    // getNextNoteId,
+    // getPrevNoteId,
 }
 
 function query(filterBy = {}) {
@@ -27,13 +27,11 @@ function query(filterBy = {}) {
                 notes = notes.filter(note => regExp.test(note.info.txt))
             }
 
-            // render only notes that *LOWER* price then Max-Price
-            if (filterBy.type) {
-                notes = notes.filter( note => regExp.test(note.info.type))
-            }
+            // if (filterBy.type) {
+            //     notes = notes.filter( note => note.type(note.info.type))
+            // }
 
-            // render only notes that on *SALE*
-console.log(notes);
+// console.log(notes);
             return notes
         })
 }
@@ -46,13 +44,13 @@ function remove(noteId) {
     return storageService.remove(NOTE_KEY, noteId)
 }
 
-function save(note) {
-    if (note.id) {
-        return storageService.put(NOTE_KEY, note)
-    } else {
-        return storageService.post(NOTE_KEY, note)
-    }
-}
+// function save(note) {
+//     if (note.id) {
+//         return storageService.put(NOTE_KEY, note)
+//     } else {
+//         return storageService.post(NOTE_KEY, note)
+//     }
+// }
 
 function getEmptyNote(txt = '', type = '') {
     return { txt , type }
@@ -62,23 +60,23 @@ function getDefaultFilter() {
     return { txt: '', type: ''}
 }
 
-function getNextNoteId(noteId) {
-    return storageService.query(NOTE_KEY)
-        .then((notes) => {
-            let noteIdx = notes.findIndex(note => note.id === noteId)
-            if (noteIdx === notes.length - 1) noteIdx = -1
-            return !!notes[noteIdx + 1].id && notes[noteIdx + 1].id
-        })
-}
+// function getNextNoteId(noteId) {
+//     return storageService.query(NOTE_KEY)
+//         .then((notes) => {
+//             let noteIdx = notes.findIndex(note => note.id === noteId)
+//             if (noteIdx === notes.length - 1) noteIdx = -1
+//             return !!notes[noteIdx + 1].id && notes[noteIdx + 1].id
+//         })
+// }
 
-function getPrevNoteId(noteId) {
-    return storageService.query(NOTE_KEY)
-        .then((notes) => {
-            let noteIdx = notes.findIndex(note => note.id === noteId)
-            if (noteIdx === 0) noteIdx = notes.length
-            return !!notes[noteIdx - 1].id && notes[noteIdx - 1].id
-        })
-}
+// function getPrevNoteId(noteId) {
+//     return storageService.query(NOTE_KEY)
+//         .then((notes) => {
+//             let noteIdx = notes.findIndex(note => note.id === noteId)
+//             if (noteIdx === 0) noteIdx = notes.length
+//             return !!notes[noteIdx - 1].id && notes[noteIdx - 1].id
+//         })
+// }
 
 function _createNotes() {
     let notes = storage.loadFromStorage(NOTE_KEY) || notesData()
@@ -115,6 +113,54 @@ return  [
     },
     {
         id: 'n103',
+        type: 'NoteTodos',
+        isPinned: false,
+        info: {
+            title: 'Get my stuff together',
+            todos: [
+                { txt: 'Driving license', doneAt: null },
+                { txt: 'Coding power', doneAt: 187111111 }
+            ]
+        }
+    },
+    {
+        id: 'n104',
+        type: 'NoteImg',
+        isPinned: false,
+        info: {
+            url: 'http://some-img/me',
+            title: 'Bobi and Me'
+        },
+        style: {
+            backgroundColor: '#00d'
+        }
+    },
+    {
+        id: 'n105',
+        type: 'NoteTodos',
+        isPinned: false,
+        info: {
+            title: 'Get my stuff together',
+            todos: [
+                { txt: 'Driving license', doneAt: null },
+                { txt: 'Coding power', doneAt: 187111111 }
+            ]
+        }
+    },
+    {
+        id: 'n106',
+        type: 'NoteImg',
+        isPinned: false,
+        info: {
+            url: 'http://some-img/me',
+            title: 'Bobi and Me'
+        },
+        style: {
+            backgroundColor: '#00d'
+        }
+    },
+    {
+        id: 'n107',
         type: 'NoteTodos',
         isPinned: false,
         info: {

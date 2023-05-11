@@ -32,20 +32,20 @@ export function NoteEdit() {
         const value = target.type === 'number' ? (+target.value || '') :
             target.type === 'text' ? target.value :
                 target.checked
-        if (field === 'price') {
-            setBookToEdit(prevBook => ({
-                ...prevBook,
-                listPrice: {
+        if (field === 'info') {
+            setNoteToEdit(prevNote => ({
+                ...prevNote,
+                info: {
                     ...prevBook.listPrice,
-                    amount: value
+                    title: value
                 }
             }))
         } 
         else {
-            setBookToEdit(prevBook => ({ ...prevBook, [field]: value }))
+            setNoteToEdit(prevNote => ({ ...prevNote, [field]: value }))
         }
     }
- 
+   
 
     function onSaveNote(ev) {
         ev.preventDefault()
@@ -56,7 +56,7 @@ export function NoteEdit() {
             })
     }
 
-    const { title, txt } = noteToEdit
+    const { txt, title } = noteToEdit
 //     console.log(noteToEdit.title);
     console.log('hi');
     return (
@@ -64,11 +64,11 @@ export function NoteEdit() {
             <h2>{noteToEdit.id ? 'Edit' : 'Add'} Note</h2> 
 
             <form onSubmit={onSaveNote} >
-                <label htmlFor="title">{noteService.info.txt}</label>
+                <label htmlFor="title">{noteToEdit.txt}</label>
                 <input onChange={handleChange} value={title} type="text" name="title" id="title" />
 
                 <label htmlFor="price">Price:</label>
-                {/* <input onChange={handleChange} value={price} type="number" name="price" id="price" /> */}
+
                 
                 <button>{noteToEdit.id ? 'Save' : 'Add'}</button>
             </form>
