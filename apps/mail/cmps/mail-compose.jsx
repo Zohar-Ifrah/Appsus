@@ -3,7 +3,7 @@ import { mailService } from "../services/mail.service.js"
 const { useState } = React
 const { Link, useNavigate } = ReactRouterDOM
 
-export function MailCompose() {
+export function MailCompose({onSetComposed}) {
     const [fieldInfo, setFieldInfo] = useState(mailService.getEmptyFields())
     const navigate = useNavigate()
 
@@ -29,14 +29,14 @@ export function MailCompose() {
         mail.sentAt = Date.now()
         mail.removedAt = null
         mailService.save(mail)
-        navigate('/mail') // check why its not rerender??
+        onSetComposed(false)
     }
 
     const { from, to, subject, body } = fieldInfo
     return (
         <form onSubmit={onSentMail} className="compose-form">
 
-            <h1>New Message <Link to="/mail"><button>x</button></Link></h1>
+            <h1>New Message <button onClick={() => onSetComposed(false)}>x</button></h1>
 
 
             <input type="email" name="from" onChange={handleChange} value={from} placeholder="From" />
