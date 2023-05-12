@@ -22,6 +22,7 @@ export function NoteType({ note }) {
             case 'NoteVideo':
             return <NoteVideo note={note} />
             
+            
 
 
     }

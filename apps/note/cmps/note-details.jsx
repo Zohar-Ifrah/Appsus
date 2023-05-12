@@ -49,6 +49,9 @@ export function NoteDetails() {
     if (!note) return <div>Loading...</div>
     return (
         <section className="note-details">
+
+            <h1>{noteId}</h1>
+            
             
             
             

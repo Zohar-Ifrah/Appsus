@@ -1,8 +1,8 @@
 export function NoteTxt({note}) {
     return (
-        <div width="200px" height="50px">
-            <span>{note.info.txt}</span>
-            <span contentEditable={true} suppressContentEditableWarning={true}></span>
+        <div>
+
+            <h1 contentEditable={true} suppressContentEditableWarning={true}>{note.info.txt}</h1>
         </div>
     );
 }
