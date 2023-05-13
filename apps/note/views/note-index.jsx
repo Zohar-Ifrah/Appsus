@@ -1,21 +1,25 @@
-const { Link } = ReactRouterDOM
+const { Link, useSearchParams } = ReactRouterDOM
 const { useEffect, useState } = React
 
 import { NoteFilter } from "../cmps/note-filter.jsx"
 // import { NotePreview } from "../cmps/note-preview.jsx"
 import { noteService } from "../services/note.service.js"
 import { NoteList } from "../cmps/note-list.jsx"
+import { DataTable } from "../cmps/data-table.jsx"
 // import { NotePreview } from './note-preview.jsx'
-// import { NoteDetails } from "./note-details.jsx"
+import { NoteDetails } from "./note-details.jsx"
+
 
 export function NoteIndex() {
 
     const [notes, setNotes] = useState([])
+    const [searchParams, setSearchParams] = useSearchParams()
     const [selectedNote, setSelectedNote] = useState(null)
     const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
 
     useEffect(() => {
         loadNotes()
+        setSearchParams(filterBy)
     }, [filterBy])
 
     function loadNotes() {
@@ -34,19 +38,24 @@ export function NoteIndex() {
     }
 
     return (
-        <section className="notes-page">
-            <div className="note-index" >
+        <main className="notes-index">
+          
                 {!selectedNote && <React.Fragment>
+                    <section className="filter-notes">
                     <NoteFilter onSetFilter={onSetFilter} filterBy={filterBy} />
-                    <div className="add-note">
-                        <Link to="//edit"><button className="add-note-btn">Add note</button></Link>
+ 
+                    <Link to="/note/edit">Add Note</Link>
 
-                    </div>
+
+                    </section>
+                    <section className="note-list">
                     <NoteList notes={notes} onRemoveNote={onRemoveNote} />
+                    
+            </section>
                 </React.Fragment>}
-            </div>
+  
             {selectedNote && <NoteDetails onBack={() => setSelectedNote(null)} note={selectedNote} />}
-        </section>
+        </main>
     )
 }
 

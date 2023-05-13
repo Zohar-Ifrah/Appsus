@@ -1,25 +1,47 @@
+.filter-notes:first-child {
+  background-color: bisque;
+  padding: auto;
+  display: grid;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+ .note-list.container {
+  background-color: gray;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
 .note {
+  margin-bottom: 20px;
   border: 1px solid black;
   border-radius: 5px;
   padding: 10px;
   background-color: antiquewhite;
   text-align: center;
   width: fit-content;
-
+  position: relative;
 }
 
-.note-img {
- 
-  width: 100%;
-  height: 200px; /* adjust to your desired height */
-  object-fit: cover; /* to fill the container */
+.note-img img{
+  width: 50%;
+  height: 200px;
+  object-fit: cover; 
 }
 
-.note-txt {
+.note-preview.note.note-actions {
   position: absolute;
-  margin: auto;
-  background-color: rgba(0, 0, 0, 0.5); /* to add a semi-transparent background */
-  
+  bottom: 0;
 }
 
+.note-actions i {
+  margin: 10px;
+}
 
+.note-details {
+  text-align: center;
+  background-color: antiquewhite;
+}

@@ -1,22 +1,18 @@
 export function NoteTodos({ note }) {
-
+    console.log(note.info.todos[0].txt);
     return (
         <React.Fragment>
+            <h1>Plans:</h1>
+            <h3>{note.info.title}</h3>
 
-            <div contentEditable="true" suppressContentEditableWarning={true}>{note.info.title}</div>
-            <h1>{note.info.title}</h1>
+            <p contentEditable>{note.info.todos[0].txt}
+             <span>{note.info.todos[0].doneAt? ' Done' : ' Need to do'}</span>
+             </p>
+            <p contentEditable>{note.info.todos[1].txt}
+            <span>{note.info.todos[1].doneAt? ' Done' : ' Need to do'}</span>
+                </p>
+
 
         </React.Fragment>
     );
 }
-
-// {
-//     id: 'n103',
-//     type: 'NoteTodos',
-//     isPinned: false,
-//     info: {
-//         title: 'Get my stuff together',
-//         todos: [
-//             { txt: 'Driving license', doneAt: null },
-//             { txt: 'Coding power', doneAt: 187111111 }
-//         ]

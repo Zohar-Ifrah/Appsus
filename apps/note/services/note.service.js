@@ -1,8 +1,5 @@
-
 import { storageService } from '../../../services/async-storage.service.js'
 import { storage } from '../../../services/storage.service.js'
-// import { utilService } from '../../../services/util.service.js'
-
 
 const NOTE_KEY = 'notesDB'
 _createNotes()
@@ -14,8 +11,7 @@ export const noteService = {
     getEmptyNote,
     getDefaultFilter,
     save,
-    // getNextNoteId,
-    // getPrevNoteId,
+    makeId,
 }
 
 function query(filterBy = {}) {
@@ -36,12 +32,6 @@ function query(filterBy = {}) {
             if (filterBy.isPinned) {
                 notes = notes.filter(note => note.isPinned)
             }
-
-            // if (filterBy.type) {
-            //     notes = notes.filter( note => note.type(note.info.type))
-            // }
-
-// console.log(notes);
             return notes
         })
 }
@@ -62,31 +52,22 @@ function save(note) {
     }
 }
 
-function getEmptyNote(txt = '', type = '') {
-    return { txt , type }
+function getEmptyNote(id, type='', title='', isPinned=false ) {
+    return {
+        type,
+        title, 
+        isPinned
+    }
+    
 }
 
-function getDefaultFilter() {
-    return { txt: '', type: ''}
+function getDefaultFilter(searchParams = { get: () => { } }) {
+    return { 
+        txt: searchParams.get('txt') || '',
+        title: searchParams.get('title') || '' 
+    }
 }
 
-// function getNextNoteId(noteId) {
-//     return storageService.query(NOTE_KEY)
-//         .then((notes) => {
-//             let noteIdx = notes.findIndex(note => note.id === noteId)
-//             if (noteIdx === notes.length - 1) noteIdx = -1
-//             return !!notes[noteIdx + 1].id && notes[noteIdx + 1].id
-//         })
-// }
-
-// function getPrevNoteId(noteId) {
-//     return storageService.query(NOTE_KEY)
-//         .then((notes) => {
-//             let noteIdx = notes.findIndex(note => note.id === noteId)
-//             if (noteIdx === 0) noteIdx = notes.length
-//             return !!notes[noteIdx - 1].id && notes[noteIdx - 1].id
-//         })
-// }
 
 function _createNotes() {
     let notes = storage.loadFromStorage(NOTE_KEY) || notesData()
@@ -95,112 +76,161 @@ function _createNotes() {
     storage.saveToStorage(NOTE_KEY, notes)
 }
 
+
+
 function notesData() {
-return  [
-    {
-        type: "NoteVideo",
-        id: 'n101',
-        isPinned: false,
-        info: {
-            title: 'Relaxation music',
-            url: "https://www.youtube.com/embed/MYJldv7ZhOA"
-        },
-        style: {
+    return [
+        {
+            type: "NoteVideo",
+            id: 'n101',
+            isPinned: false,
+            title: 'Relaxation Youtube',
+            url: "https://www.youtube.com/embed/MYJldv7ZhOA",
             backgroundColor: "#ffee58fa",
-        }
-    },
-    {
-        id: 'n102',
-        type: 'NoteImg',
-        isPinned: false,
-        info: {
-            url: 'https://picsum.photos/200/300',
-            title: 'Bobi and Me'
-        },
-        style: {
-            backgroundColor: '#00d'
-        }
-    },
-    {
-        id: 'n103',
-        type: 'NoteTodos',
-        isPinned: false,
-        info: {
-            title: 'Get my stuff together',
-            todos: [
-                { txt: 'Driving license', doneAt: null },
-                { txt: 'Coding power', doneAt: 187111111 }
-            ]
-        }
-    },
-    {
-        id: 'n104',
-        type: 'NoteImg',
-        isPinned: false,
-        info: {
-            url: 'https://picsum.photos/200/300',
-            title: 'Bobi and Me'
-        },
-    },
-    {
-        id: 'n105',
-        type: 'NoteTodos',
-        isPinned: false,
-        info: {
-            title: 'Get my stuff together',
-            todos: [
-                { txt: 'Driving license', doneAt: null },
-                { txt: 'Coding power', doneAt: 187111111 }
-            ]
-        }
-    },
-    {
-        type: "NoteVideo",
-        id: 'n106',
-        isPinned: false,
-        info: {
-            title: 'Relaxation music',
-            url: "https://www.youtube.com/embed/MYJldv7ZhOA"
-        },
-        style: {
-            backgroundColor: "#ffee58fa",
-        }
-    },
-    {
-        id: 'n107',
-        type: 'NoteImg',
-        isPinned: false,
-        info: {
-            url: 'https://picsum.photos/200/300',
-            title: 'Bobi and Me'
-        },
-        style: {
-            backgroundColor: '#00d'
-        }
-    },
-    {
-    id: 'n108',
-    type: 'NoteAudio',
-    isPinned: false,
-    info: {
-        url: '../../apps/note/audio/audio.mp3',
-    },
 
-    
-},
-    {
-        id: 'n109',
-        type: 'NoteTodos',
-        isPinned: false,
-        info: {
-            title: 'Get my stuff together',
-            todos: [
-                { txt: 'Driving license', doneAt: null },
-                { txt: 'Coding power', doneAt: 187111111 }
-            ]
-        }
+        },
+        {
+            id: 'n102',
+            type: 'NoteImg',
+            title: 'Lovely times',
+            isPinned: false,
+            info: {
+                url: 'https://picsum.photos/200/300',
+                title: 'Bobi and Me'
+            },
+            style: {
+                backgroundColor: '#00d'
+            }
+        },
+        {
+            id: 'n103',
+            type: 'NoteTodos',
+            isPinned: false,
+            info: {
+                title: 'Get my stuff together',
+                todos: [
+                    { txt: 'Driving license', doneAt: null },
+                    { txt: 'Coding power', doneAt: 187111111 }
+                ]
+            }
+        },
+        {
+            id: 'n104',
+            title: 'Relaxation audio',
+            type: 'NoteAudio',
+            isPinned: false,
+            info: {
+                url: '../../apps/note/audio/audio.mp3',
+            },
+
+
+        },
+        {
+            type: "NoteVideo",
+            id: 'n105',
+            isPinned: false,
+            title: 'Relaxation Youtube',
+            url: "https://www.youtube.com/embed/MYJldv7ZhOA",
+            backgroundColor: "#ffee58fa",
+
+        },
+        {
+            id: 'n106',
+            type: 'NoteImg',
+            title: 'Trips to remember',
+            isPinned: false,
+            info: {
+                url: 'https://picsum.photos/200/300',
+                title: 'Bobi and Me'
+            },
+            style: {
+                backgroundColor: '#00d'
+            }
+        },
+        {
+            id: 'n107',
+            type: 'NoteTodos',
+            isPinned: false,
+            info: {
+                title: 'Groceries',
+                todos: [
+                    { txt: 'Milk, Bread, Vegetables', doneAt: null },
+                    { txt: 'Washing Powder', doneAt: 187111111 }
+                ]
+            }
+        },
+        {
+            id: 'n108',
+            title: 'Coding Mood',
+            type: 'NoteAudio',
+            isPinned: false,
+            info: {
+                url: '../../apps/note/audio/audio.mp3',
+            },
+
+
+        },
+        {
+            type: "NoteVideo",
+            id: 'n109',
+            isPinned: false,
+            title: 'Memories',
+            url: "https://www.youtube.com/embed/MYJldv7ZhOA",
+            backgroundColor: "#ffee58fa",
+
+        },
+
+        {
+            id: 'n110',
+            type: 'NoteImg',
+            title: 'Lovely times',
+            isPinned: false,
+            info: {
+                url: 'https://picsum.photos/200/300',
+                title: 'Bobi and Me'
+            },
+            style: {
+                backgroundColor: '#00d'
+            }
+        },
+        {
+            id: 'n111',
+            type: 'NoteTodos',
+            isPinned: false,
+            info: {
+                title: 'Studies',
+                todos: [
+                    { txt: 'React', doneAt: null },
+                    { txt: 'Css', doneAt: 187111111 }
+                ]
+            }
+        },
+        {
+            id: 'n112',
+            title: 'Relaxation audio',
+            type: 'NoteAudio',
+            isPinned: false,
+            info: {
+                url: '../../apps/note/audio/audio.mp3',
+            },
+
+
+        },
+       
+    ]
+
+}
+
+
+
+function makeId(length = 6) {
+    var txt = ''
+    var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+    for (var i = 0; i < length; i++) {
+        txt += possible.charAt(Math.floor(Math.random() * possible.length))
     }
-]
 
+    return txt
 }
 

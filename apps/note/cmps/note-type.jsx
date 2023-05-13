@@ -6,10 +6,8 @@ import { NoteVideo } from "./note-video.jsx";
 
 const { Outlet, NavLink } = ReactRouterDOM
 
-
 export function NoteType({ note }) {
     console.log(note.type);
-
     switch (note.type) {
         case 'NoteImg':
             return <NoteImg note={note} />
@@ -21,10 +19,5 @@ export function NoteType({ note }) {
             return <NoteAudio note={note} />
             case 'NoteVideo':
             return <NoteVideo note={note} />
-            
-            
-
-
     }
-
 }
