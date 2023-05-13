@@ -1,6 +1,7 @@
 const { useEffect, useState } = React
 
 import { DropdownFilter } from "../cmps/dropdown-filter.jsx"
+import { DropdownSort } from "../cmps/dropdown-sort.jsx"
 import { MailCompose } from "../cmps/mail-compose.jsx"
 import { MailFolderList } from "../cmps/mail-folder-list.jsx"
 import { MailList } from "../cmps/mail-list.jsx"
@@ -10,16 +11,17 @@ import { mailService } from "../services/mail.service.js"
 
 export function MailIndex() {
     const [mails, setMails] = useState([])
-    const [filterBy, setFilterBy] = useState({ status: 'inbox', body: '' })
+    const [filterBy, setFilterBy] = useState({ status: 'inbox'})
+    const [sortBy, setSortBy] = useState()
     const [unreadCount, setUnreadCount] = useState()
     const [isComposed, setIsComposed] = useState(false)
 
     useEffect(() => {
         loadMails()
-    }, [filterBy, isComposed])
+    }, [filterBy, isComposed, sortBy])
 
     function loadMails() {
-        mailService.query(filterBy).then(({ mails, unreadCount }) => {
+        mailService.query(filterBy, sortBy).then(({ mails, unreadCount }) => {
             console.log(mails)
             setMails(mails)
             setUnreadCount(unreadCount)
@@ -79,7 +81,12 @@ export function MailIndex() {
     }
 
     function onSetFilter(filterBy) {
+        console.log(filterBy)
         setFilterBy(prevFilterBy => ({ ...prevFilterBy, ...filterBy }))
+    }
+
+    function onSetSort(sortBy) {
+        setSortBy(prevSortBy => ({ ...prevSortBy, ...sortBy }))
     }
 
     console.log('render mail-index')
@@ -91,7 +98,12 @@ export function MailIndex() {
                         <MailLogo />
                         <MailSearch filterBy={filterBy} onSetFilter={onSetFilter} />
                     </div>
-                    <DropdownFilter onSetFilter={onSetFilter} />
+
+                    <div className="dropdown-btns">
+                        <DropdownFilter onSetFilter={onSetFilter} />
+                        <DropdownSort onSetSort={onSetSort} />
+                    </div>
+
                     <div className="mail-lists">
                         <MailFolderList onSetFilter={onSetFilter} unreadCount={unreadCount} setIsComposed={setIsComposed} />
                         <MailList mails={mails} onChangeStatus={onChangeStatus} onDeleteMail={onDeleteMail} onSetStared={onSetStared} />

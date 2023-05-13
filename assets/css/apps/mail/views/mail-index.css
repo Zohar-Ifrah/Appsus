@@ -41,6 +41,22 @@
    background-color: #f2f6fc;
  }
 
+ span.inbox-txt {
+   position: relative;
+   left: 1em;
+ }
+
+ span.sent-txt {
+  position: relative;
+  bottom: 6px;
+  left: 0.3em;
+}
+
+span.draft-txt {
+  position: relative;
+  left: 1.2em;
+}
+
  /* .mail-list tr {
    height: 1em;
  } */
@@ -53,6 +69,12 @@ tr:nth-child(2n) {
 } */
  .expanded-tr {
    background-color: white;
+   position: relative;
+ }
+
+ .expanded-tr span {
+   display: block;
+   margin-bottom: 10px;
  }
 
  .mail-search {
@@ -291,4 +313,29 @@ tr:nth-child(2n) {
    position: relative;
    left: 17.7em;
    margin-block-end: 7px;
+ }
+
+ .dropdown-sort {
+   width: max-content;
+   position: relative;
+   left: 17.7em;
+   margin-block-end: 7px;
+ }
+
+ .expanded-tr-btns {
+   background-color: #1a73e8;
+   position: absolute;
+   top: 0;
+   right: 0;
+ }
+
+ .mail-open {
+   background-color: white;
+   position: absolute;
+   bottom: 0;
+   width: 100%;
+   height: 100%;
+   z-index: 1;
+   max-width: 48em;
+   max-height: 32em;
  }

@@ -313,19 +313,18 @@ const demoData = [
 //first load of DB
 _createMails()
 
-function query(filterBy = {}) {
+function query(filterBy = {}, sortBy = {}) {
     return storageService.query(MAIL_KEY)
         .then(mails => {
             const unreadCount = mails.reduce((count, mail) => {
-                if (mail.status !== 'trash' && !mail.isRead) count++
+                if (mail.status !== 'trash' && !mail.isRead && mail.to === 'zoharYuval@appsus.com') count++
                 return count
             }, 0)
 
             // render only mails that contains the *body* input that the user search
             if (filterBy.body) {
-                console.log(filterBy.body)
-                const regExp = new RegExp(filterBy.txt, 'i')
-                mails = mails.filter(mail => regExp.test(mail.body)) //|| regExp.test(mail.subject)
+                const regExp = new RegExp(filterBy.body)
+                mails = mails.filter(mail => regExp.test(mail.body) || regExp.test(mail.subject))
                 console.log(mails)
             }
 
@@ -340,6 +339,22 @@ function query(filterBy = {}) {
                 else mails = mails.filter(mail => !mail.isStar) // isStar = fasle
             }
 
+            // Sortting:
+            //sort by title:
+            console.log(sortBy)
+            if (sortBy.subject) {
+                mails.sort((a, b) => a.subject.localeCompare(b.subject))
+            }
+
+            //sort by date:
+            if (sortBy.sentAt) {
+                mails.sort((a, b) => a.sentAt - b.sentAt)
+            }
+
+            //sort by mail:
+            if (sortBy.address) {
+                mails.sort((a, b) => a.to.localeCompare(b.to))
+            }
 
             if (filterBy.status) {
                 if (filterBy.status === 'all') return { mails, unreadCount }

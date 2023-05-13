@@ -1,11 +1,13 @@
 import { utilService } from "../../../services/util.service.js";
 import { LongTxt } from "./long-txt.jsx";
+import { MailOpen } from "./mail-open.jsx";
 
 const { Fragment, useState } = React
 const { Link } = ReactRouterDOM
 
 export function MailPreview({ mail, onChangeStatus, onDeleteMail, onSetStared }) {
     const [isExpanded, setIsExpanded] = useState(false)
+    const [isOpened, setIsOpened] = useState(false)
     const date = new Date(mail.sentAt)
     const month = utilService.getMonthName(date)
     const day = date.getDate()
@@ -14,6 +16,10 @@ export function MailPreview({ mail, onChangeStatus, onDeleteMail, onSetStared })
     function starClicked(ev, val) {
         ev.stopPropagation()  // why not working???
         onSetStared(val, mail)
+    }
+
+    function openMail() {
+        setIsOpened(true)
     }
 
     return (
@@ -39,29 +45,32 @@ export function MailPreview({ mail, onChangeStatus, onDeleteMail, onSetStared })
             {
                 isExpanded && <tr className="expanded-tr">
                     <td colSpan="4">
-                        {mail.subject}
-                        {mail.body}
+                        <span>{mail.subject}</span>
+                        <div className="expanded-tr-btns">
+                            <button className="fa fa-external-link" title="Enter mail"
+                                onClick={() => openMail()}></button>
 
+                            {mail.isRead ?
+                                <button className="fa fa-inbox" title="Mark as unread"
+                                    onClick={() => onChangeStatus(mail.id, 'isRead', false)}></button> :
+                                <button className="fa fa-envelope" title="Mark as read"
+                                    onClick={() => onChangeStatus(mail.id, 'isRead', true)}></button>}
 
-                        <button className="fa fa-external-link" title="Enter mail"></button>
-
-                        {mail.isRead ?
-                            <button className="fa fa-inbox" title="Mark as unread"
-                                onClick={() => onChangeStatus(mail.id, 'isRead', false)}></button> :
-                            <button className="fa fa-envelope" title="Mark as read"
-                                onClick={() => onChangeStatus(mail.id, 'isRead', true)}></button>}
-
-                        <button className="fa fa-trash" title="Delete"
-                            onClick={() => onDeleteMail(mail, 'trash')}></button>
+                            <button className="fa fa-trash" title="Delete"
+                                onClick={() => onDeleteMail(mail, 'trash')}></button>
+                        </div>
+                        <span>{mail.body}</span>
                         <br />
-                        {mail.from.fullname}
-                        {` <${mail.from.mail}> `}
-                        <br />
-                        some words to fill the area just a bit to make it look bigger ty for reading!!
+                        <span>
+                            {mail.from.fullname}
+                            {` <${mail.from.mail}> `}
+                        </span>
                     </td>
                 </tr>
 
             }
+            {isOpened && <MailOpen mail={mail} onChangeStatus={onChangeStatus}
+                onDeleteMail={onDeleteMail} onSetStared={onSetStared} setIsOpened={setIsOpened} />}
         </React.Fragment>
     )
 }
