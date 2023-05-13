@@ -25,3 +25,18 @@ a {
 button {
     cursor: pointer;
 }
+
+.about {
+    text-align: center;
+    background-color: beige;
+}
+
+.home{
+    text-align: center;
+    background-color: cadetblue;
+}
+
+.mail-img {
+    width: 100px;
+}
+

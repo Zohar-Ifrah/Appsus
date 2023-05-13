@@ -21,7 +21,8 @@ export function NoteFilter({ filterBy, onSetFilter }) {
     const { txt, type } = filterByToEdit
     return (
       <section className="note-filter">
-        <h2>Filter notes by type</h2>
+        <h2>Our Note-kepper</h2>
+        <h3>Filter notes</h3>
   
         <form onSubmit={onSubmitFilter}>
           <label htmlFor="type">Type:</label>
