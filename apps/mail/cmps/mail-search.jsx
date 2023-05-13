@@ -18,10 +18,11 @@ export function MailSearch({ filterBy, onSetFilter }) {
 
     const { body } = filterByToEdit
     return (
-        <form onSubmit={onSubmitFilter} onChange={(e) => handleChange(e)} className="mail-search">
-            <label htmlFor="body">search:</label>
-            <input value={body} type="search" name="body" id="body" placeholder={` Search mail`} />
-        </form>
+        // <form onSubmit={onSubmitFilter} onChange={(e) => handleChange(e)} className="mail-search">
+        //     <label htmlFor="body">search:</label>
+        //     <input value={body} type="search" name="body" id="body" placeholder={` Search mail`} />
+        // </form>
+        <h1>hi</h1>
     )
 }
 
