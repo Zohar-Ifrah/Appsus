@@ -1,9 +1,9 @@
 import { mailService } from "../services/mail.service.js"
 
 const { useState } = React
-const { Link, useNavigate } = ReactRouterDOM
+const { useNavigate } = ReactRouterDOM
 
-export function MailCompose({onSetComposed}) {
+export function MailCompose({ onSetComposed }) {
     const [fieldInfo, setFieldInfo] = useState(mailService.getEmptyFields())
     const navigate = useNavigate()
 

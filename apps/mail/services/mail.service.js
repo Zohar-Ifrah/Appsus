@@ -168,46 +168,43 @@ const demoData = [
         isStar: false
     },
     {
-        id: 'e104',
-        subject: 'Miss you!',
-        body: 'Would love to catch up sometimes',
+        id: 'e125',
+        subject: 'Interested in your company',
+        body: 'Dear Yuval, we are interested in your company\'s services and would like to request a proposal for our upcoming project.Please let us know if you are available for a call to discuss further details.',
         isRead: false,
         sentAt: 1551133930594,
         removedAt: null,
-        from: {
-            mail: 'puki@pu.com',
-            fullname: 'puki pu'
-        },
-        to: 'zoharYuval@appsus.com',
-        status: 'inbox',
+        from: loggedinUser,
+        to: 'kirbi@assus.com',
+        status: 'sent',
         isStar: true
     },
     {
-        id: 'e105',
+        id: 'e126',
         subject: 'Miss you!',
         body: 'Would love to catch up sometimes',
         isRead: false,
         sentAt: 1551133930594,
         removedAt: null,
         from: loggedinUser,
-        to: 'assus@assus.com',
+        to: 'guri@assus.com',
         status: 'sent',
         isStar: true
     },
     {
-        id: 'e106',
+        id: 'e127',
         subject: 'Miss you!',
         body: 'Would love to catch up sometimes',
         isRead: false,
         sentAt: 1551133930594,
         removedAt: 1551133930594,
         from: loggedinUser,
-        to: 'assus@assus.com',
-        status: 'trash',
+        to: 'clud@assus.com',
+        status: 'sent',
         isStar: false
     },
     {
-        id: 'e107',
+        id: 'e128',
         subject: 'Miss you!',
         body: 'Would love to catch up sometimes',
         isRead: false,
@@ -219,22 +216,19 @@ const demoData = [
         isStar: false
     },
     {
-        id: 'e108',
+        id: 'e129',
         subject: 'Miss you!',
         body: 'Would love to catch up sometimes',
         isRead: false,
         sentAt: 1551133930594,
         removedAt: null,
-        from: {
-            mail: 'Popo@popo.com',
-            fullname: 'Popo Po'
-        },
-        to: 'zoharYuval@Appsus.com',
-        status: 'inbox',
+        from: loggedinUser,
+        to: 'harry@Appsus.com',
+        status: 'sent',
         isStar: true
     },
     {
-        id: 'e109',
+        id: 'e130',
         subject: 'Miss you!',
         body: 'Would love to catch up sometimes',
         isRead: false,
@@ -245,11 +239,11 @@ const demoData = [
             fullname: 'puki pu'
         },
         to: 'zoharYuval@appsus.com',
-        status: 'inbox',
+        status: 'draft',
         isStar: false
     },
     {
-        id: 'e110',
+        id: 'e131',
         subject: 'Lets meet!',
         body: 'Would love to catch up sometimes we can go to the river and have a nice time',
         isRead: false,
@@ -260,11 +254,11 @@ const demoData = [
             fullname: 'Shuki puk'
         },
         to: 'zoharYuval@appsus.com',
-        status: 'inbox',
+        status: 'draft',
         isStar: true
     },
     {
-        id: 'e111',
+        id: 'e132',
         subject: 'Hi there!',
         body: 'We can go to the river and have a nice time, Would love to catch up sometimes!',
         isRead: false,
@@ -275,11 +269,11 @@ const demoData = [
             fullname: 'Shuki puk'
         },
         to: 'zoharYuval@appsus.com',
-        status: 'inbox',
+        status: 'draft',
         isStar: true
     },
     {
-        id: 'e112',
+        id: 'e133',
         subject: 'Lets meet!',
         body: 'Would love to catch up sometimes we can go to the river and have a nice time',
         isRead: false,
@@ -290,11 +284,11 @@ const demoData = [
             fullname: 'Muki muk'
         },
         to: 'zoharYuval@appsus.com',
-        status: 'inbox',
+        status: 'draft',
         isStar: true
     },
     {
-        id: 'e113',
+        id: 'e134',
         subject: 'How are you?',
         body: 'Would love to have a nice time and catch up sometimes we can go to the river!',
         isRead: false,
@@ -305,7 +299,145 @@ const demoData = [
             fullname: 'Yuki puk'
         },
         to: 'zoharYuval@appsus.com',
-        status: 'inbox',
+        status: 'draft',
+        isStar: false
+    },
+    {
+        id: 'e135',
+        subject: 'Reminder: Meeting Tomorrow',
+        body: 'Just a friendly reminder that we have a meeting scheduled for tomorrow at 10am. Looking forward to seeing you there!',
+        isRead: true,
+        sentAt: 1551133930594,
+        removedAt: null,
+        from: loggedinUser,
+        to: 'sarah.smith@abc.com',
+        status: 'sent',
+        isStar: false
+    },
+    {
+        id: 'e136',
+        subject: 'Project Update',
+        body: 'Hi Zohar, just wanted to give you a quick update on the project. Everything is going smoothly and we\'re on track to hit our targets.Let me know if you have any questions!',
+        isRead: false,
+        sentAt: 1551133930594,
+        removedAt: null,
+        from: {
+            mail: 'john.doe@xyz.com',
+            fullname: 'John Doe'
+        },
+        to: 'zoharYuval@appsus.com',
+        status: 'draft',
+        isStar: true
+    },
+    {
+        id: 'e137',
+        subject: 'Invitation to a Networking Event',
+        body: 'Hi Zohar, I wanted to extend an invitation to a networking event next week. There will be a lot of great professionals attending, and I think it would be a great opportunity for you to make some new connections. Let me know if you\'re interested!',
+        isRead: true,
+        sentAt: 1551133930594,
+        removedAt: null,
+        from: {
+            mail: 'jane.doe@abc.com',
+            fullname: 'Jane Doe'
+        },
+        to: 'zoharYuval@appsus.com',
+        status: 'draft',
+        isStar: true
+    },
+    {
+        id: 'e138',
+        subject: 'Invoice #1234',
+        body: 'Hi Zohar, just wanted to send over the invoice for this month. Please let me know if you have any questions or concerns. Thanks!',
+        isRead: false,
+        sentAt: 1551133930594,
+        removedAt: null,
+        from: {
+            mail: 'accounting@xyz.com',
+            fullname: 'Accounting Department'
+        },
+        to: 'zoharYuval@appsus.com',
+        status: 'draft',
+        isStar: false
+    },
+    {
+        id: 'e139',
+        subject: 'Feedback Request',
+        body: 'Hi Zohar, I hope this email finds you well. We wanted to request your feedback on our recent product launch. Please take a moment to fill out this survey and let us know your thoughts. Thanks!',
+        isRead: true,
+        sentAt: 1551133930594,
+        removedAt: null,
+        from: loggedinUser,
+        to: 'feedback@abc.com',
+        status: 'sent',
+        isStar: true
+    },
+    {
+        id: 'e140',
+        subject: 'Meeting reminder',
+        body: 'Hi there, just a friendly reminder that we have a meeting scheduled for tomorrow at 10 am in room 101. Looking forward to seeing you there.',
+        isRead: true,
+        sentAt: 1632115200000,
+        removedAt: 1632115200000,
+        from: loggedinUser,
+        to: 'jane.doe@example.com',
+        status: 'sent',
+        isStar: false
+    },
+    {
+        id: 'e141',
+        subject: 'Re: Your invoice',
+        body: 'Hello, thank you for submitting your invoice. We have reviewed it and will process the payment within the next 3-5 business days. If you have any questions or concerns, please don\'t hesitate to reach out to us.',
+        isRead: false,
+        sentAt: 1628745600000,
+        removedAt: 1631270400000,
+        from: {
+            mail: 'accounting@company.com',
+            fullname: 'Accounting Department'
+        },
+        to: 'jane.doe@example.com',
+        status: 'draft',
+        isStar: false
+    },
+    {
+        id: 'e142',
+        subject: 'Thanks for your order',
+        body: 'Dear customer, thank you for your recent order. Your package is on its way and should arrive within the next 2-3 business days. If you have any questions or concerns, please don\'t hesitate to contact us.',
+        isRead: false,
+        sentAt: 1631270400000,
+        removedAt: 1628745600000,
+        from: {
+            mail: 'sales@company.com',
+            fullname: 'Sales Department'
+        },
+        to: 'jane.doe@example.com',
+        status: 'draft',
+        isStar: false
+    },
+    {
+        id: 'e143',
+        subject: 'Invitation to our event',
+        body: 'Hi there, we would like to invite you to our annual charity event on June 1st at 7 pm. There will be food, drinks, and entertainment, and all proceeds will go to a good cause. We hope to see you there!',
+        isRead: true,
+        sentAt: 1621836000000,
+        removedAt: null,
+        from: {
+            mail: 'events@company.com',
+            fullname: 'Events Team'
+        },
+        to: 'jane.doe@example.com',
+        status: 'sent',
+        isStar: false
+    },
+    {
+        id: 'e144',
+        subject: 'Request for proposal',
+        body: 'Dear Jane, we are interested in your company\'s services and would like to request a proposal for our upcoming project.Please let us know if you are available for a call to discuss further details.',
+        isRead: false,
+        sentAt: 1628640000000,
+        removedAt: 1628973600000,
+        from: loggedinUser,
+        to: 'jane.doe@example.com',
+        status: 'sent',
         isStar: false
     }
 ]
@@ -321,6 +453,11 @@ function query(filterBy = {}, sortBy = {}) {
                 return count
             }, 0)
 
+            if (filterBy.status) {
+                if (filterBy.status !== 'all')
+                    mails = _filterMails(mails, filterBy.status)
+            }
+            
             // render only mails that contains the *body* input that the user search
             if (filterBy.body) {
                 const regExp = new RegExp(filterBy.body)
@@ -356,10 +493,7 @@ function query(filterBy = {}, sortBy = {}) {
                 mails.sort((a, b) => a.to.localeCompare(b.to))
             }
 
-            if (filterBy.status) {
-                if (filterBy.status === 'all') return { mails, unreadCount }
-                mails = _filterMails(mails, filterBy.status)
-            }
+
             return { mails, unreadCount }
         })
 }

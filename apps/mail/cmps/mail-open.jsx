@@ -1,21 +1,7 @@
 import { utilService } from "../../../services/util.service.js";
-import { LongTxt } from "./long-txt.jsx";
-
-const { Fragment, useState } = React
-const { Link } = ReactRouterDOM
+const { useState } = React
 
 export function MailOpen({ mail, onChangeStatus, onDeleteMail, onSetStared, setIsOpened }) {
-    console.log(mail)
-    const [isExpanded, setIsExpanded] = useState(false)
-    const date = new Date(mail.sentAt)
-    const month = utilService.getMonthName(date)
-    const day = date.getDate()
-    const txt = mail.body
-
-    function starClicked(ev, val) {
-        ev.stopPropagation()
-        onSetStared(val, mail)
-    }
 
     function openMail() {
         setIsOpened(false)
