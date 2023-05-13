@@ -37,6 +37,11 @@ button {
 }
 
 .mail-img {
-    width: 100px;
+    width: 27.5em
 }
 
+.apps-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
