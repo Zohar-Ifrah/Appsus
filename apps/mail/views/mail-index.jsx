@@ -11,7 +11,7 @@ import { mailService } from "../services/mail.service.js"
 
 export function MailIndex() {
     const [mails, setMails] = useState([])
-    const [filterBy, setFilterBy] = useState({ status: 'inbox'})
+    const [filterBy, setFilterBy] = useState({ status: 'inbox' })
     const [sortBy, setSortBy] = useState()
     const [unreadCount, setUnreadCount] = useState()
     const [isComposed, setIsComposed] = useState(false)
@@ -22,7 +22,6 @@ export function MailIndex() {
 
     function loadMails() {
         mailService.query(filterBy, sortBy).then(({ mails, unreadCount }) => {
-            console.log(mails)
             setMails(mails)
             setUnreadCount(unreadCount)
         })
@@ -41,8 +40,8 @@ export function MailIndex() {
         if (mail.status === 'trash') { // PERMENET Delete
             mailService.save(mailToDel).then(() => { // to update service
                 updateMails.splice(idx, 1)
-                setMails(updateMails) // to update DOM  >>> why dont update to dom right away????? (its not really delete mail)
-                // loadMails() // to update DOM         >>> why dont update to dom right away?????
+                setMails(updateMails) // to update DOM  >>> why dont update to dom right away?
+                // loadMails() // to update DOM         >>> why dont update to dom right away?
                 console.log('Conversation moved to Trash.') // to be user msg
             })
         } else { // move to trash 
@@ -81,7 +80,6 @@ export function MailIndex() {
     }
 
     function onSetFilter(filterBy) {
-        console.log(filterBy)
         setFilterBy(prevFilterBy => ({ ...prevFilterBy, ...filterBy }))
     }
 

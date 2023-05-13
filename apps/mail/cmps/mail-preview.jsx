@@ -2,8 +2,7 @@ import { utilService } from "../../../services/util.service.js";
 import { LongTxt } from "./long-txt.jsx";
 import { MailOpen } from "./mail-open.jsx";
 
-const { Fragment, useState } = React
-const { Link } = ReactRouterDOM
+const { useState } = React
 
 export function MailPreview({ mail, onChangeStatus, onDeleteMail, onSetStared }) {
     const [isExpanded, setIsExpanded] = useState(false)
@@ -14,7 +13,7 @@ export function MailPreview({ mail, onChangeStatus, onDeleteMail, onSetStared })
     const txt = mail.body
 
     function starClicked(ev, val) {
-        ev.stopPropagation()  // why not working???
+        ev.stopPropagation()  // why not working?
         onSetStared(val, mail)
     }
 
@@ -36,9 +35,7 @@ export function MailPreview({ mail, onChangeStatus, onDeleteMail, onSetStared })
                     {mail.from.fullname}
                 </td>
                 <td>{mail.subject}</td>
-                <td><LongTxt txt={mail.body} length={50} /></td>
-                {/* <td>{mail.body}</td> */}
-                {/* <td>{console.log(txt)}</td> */}
+                <td><LongTxt txt={mail.body} length={40} /></td>
                 <td>{month + ' ' + day}</td>
 
             </tr>

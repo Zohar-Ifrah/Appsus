@@ -12,7 +12,6 @@ export function MailSearch({ filterBy, onSetFilter }) {
 
     function onSubmitFilter(ev) {
         ev.preventDefault()
-        console.log(filterByToEdit)
         onSetFilter(filterByToEdit)
     }
 

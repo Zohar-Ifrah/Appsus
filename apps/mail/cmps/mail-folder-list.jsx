@@ -1,4 +1,4 @@
-const { Link, Outlet } = ReactRouterDOM
+const { Outlet } = ReactRouterDOM
 
 export function MailFolderList({ onSetFilter, unreadCount, setIsComposed }) {
 
@@ -8,9 +8,6 @@ export function MailFolderList({ onSetFilter, unreadCount, setIsComposed }) {
 
             <button onClick={() => onSetFilter({ status: 'inbox' })}><span><i className="icon-inbox">
             </i>  <span className="inbox-txt">Inbox</span></span><span>{unreadCount}</span> </button>
-
-            {/* <button onClick={() => onSetFilter({ status: 'starred' })}><span><i className="icon-star-empty">
-            </i>  Starred</span></button> */}
 
             <button onClick={() => onSetFilter({ status: 'sent' })}><span>{<img className='sent-img'
                 src="../assets/img/sent.svg" alt="" />} <span className="sent-txt">Sent</span></span></button>
