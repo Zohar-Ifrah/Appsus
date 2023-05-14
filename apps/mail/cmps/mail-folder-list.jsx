@@ -10,7 +10,7 @@ export function MailFolderList({ onSetFilter, unreadCount, setIsComposed }) {
             </i>  <span className="inbox-txt">Inbox</span></span><span>{unreadCount}</span> </button>
 
             <button onClick={() => onSetFilter({ status: 'sent' })}><span>{<img className='sent-img'
-                src="../assets/img/sent.svg" alt="" />} <span className="sent-txt">Sent</span></span></button>
+                src="./assets/img/sent.svg" alt="" />} <span className="sent-txt">Sent</span></span></button>
 
             <button onClick={() => onSetFilter({ status: 'draft' })}><span><i className="icon-file-alt">
             </i>  <span className="draft-txt">Draft</span></span></button>

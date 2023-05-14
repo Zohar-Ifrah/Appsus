@@ -31,7 +31,7 @@ export function MailPreview({ mail, onChangeStatus, onDeleteMail, onSetStared })
                         <button className="star-btn" title="Not starred"
                             onClick={() => starClicked(event, false)}>⭐</button> :
                         <button className="star-btn" title="Not starred" onClick={() => starClicked(event, true)}>
-                            <img className='sent-img' src="../assets/img/star.svg" alt="" /></button>}
+                            <img className='sent-img' src="./assets/img/star.svg" alt="" /></button>}
                     {mail.from.fullname}
                 </td>
                 <td>{mail.subject}</td>
